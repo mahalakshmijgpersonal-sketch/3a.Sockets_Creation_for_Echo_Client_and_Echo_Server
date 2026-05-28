@@ -14,74 +14,40 @@ Server.py
 
 import socket
 
-port = 60000
 s = socket.socket()
-host = socket.gethostname()
-s.bind((host, port))
+s.bind(('localhost', 6000))
 s.listen(5)
 
+c, addr = s.accept()
+
 while True:
-    conn, addr = s.accept()
-    data = conn.recv(1024)
-    print('Server received', repr(data))
-
-    filename = 'mytext.txt'
-    f = open(filename, 'rb')
-    l = f.read(1024)
-
-    while l:
-        conn.send(l)
-        print('Sent', repr(l))
-        l = f.read(1024)
-
-    f.close()
-    print('Done sending')
-
-    conn.send(' Thank you for connecting '.encode())
-    conn.close()
+    ClientMessage = c.recv(1024).decode()
+    c.send(ClientMessage.encode())
 
 ```
+
 Client.py
+
 ```
 
 import socket
 
 s = socket.socket()
+s.connect(('localhost', 6000))
 
-host = socket.gethostname()
-port = 60000
-
-s.connect((host, port))
-
-s.send("Hello server!".encode())
-
-with open('received_file', 'wb') as f:
-
-    while True:
-        print('receiving data...')
-
-        data = s.recv(1024)
-
-        print('data=%s' % (data))
-
-        if not data:
-            break
-
-        f.write(data)
-
-print('Successfully get the file')
-
-s.close()
-
-print('connection closed')
+while True:
+    msg = input("Client > ")
+    s.send(msg.encode())
+    print("Server > ", s.recv(1024).decode())
 
 ```
 
 
 ## OUPUT
 
+<img width="1920" height="1080" alt="Screenshot 2026-05-21 090947" src="https://github.com/user-attachments/assets/2f8af795-99a4-431c-a660-fcf58a993154" />
 
-<img width="1920" height="1080" alt="Screenshot 2026-05-21 090938" src="https://github.com/user-attachments/assets/220c78e9-86a9-4ab3-8b2d-727fb2487581" />
+
 
 ## RESULT
 Thus, the python program for creating Echo Client and Echo Server using TCP Sockets Links 
