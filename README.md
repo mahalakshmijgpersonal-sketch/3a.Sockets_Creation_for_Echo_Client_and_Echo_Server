@@ -45,7 +45,7 @@ while True:
 
 ## OUPUT
 
-<img width="1920" height="1080" alt="Screenshot 2026-05-21 090947" src="https://github.com/user-attachments/assets/2f8af795-99a4-431c-a660-fcf58a993154" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-20 215503" src="https://github.com/user-attachments/assets/81b5a112-7963-4566-8ec2-2abc5869fcd7" />
 
 
 
